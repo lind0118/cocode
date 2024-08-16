@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
-import { v4 as uuidV4 } from 'uuid';
+import React, { useState } from 'react'
+import {v4} from 'uuid'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const navigate = useNavigate();
-
+    const navigate = useNavigate()
     const [roomId, setRoomId] = useState('');
-    const [username, setUsername] = useState('');
-    const createNewRoom = (e) => {
-        e.preventDefault();
-        const id = uuidV4();
+    const [username, setUsername] = useState('')
+
+    const  createNewRoom = event => {
+        event.preventDefault()
+        const id = v4()
         setRoomId(id);
-        toast.success('Created a new room');
-    };
+        toast.success('Created a new room')
+    }
 
     const joinRoom = () => {
-        if (!roomId || !username) {
-            toast.error('ROOM ID & username is required');
-            return;
+        if(!roomId || !username) {
+            toast.error('Room ID and Username is required')
+            return
         }
-
         // Redirect
-        navigate(`/editor/${roomId}`, {
-            state: {
-                username,
-            },
-        });
-    };
+        navigate('/editor/${roomId}', {
+            state: { username }
+        })
+    }
 
-    const handleInputEnter = (e) => {
-        if (e.code === 'Enter') {
-            joinRoom();
+    const handleInputEnter = event => {
+        if (event.code === 'Enter') {
+            joinRoom()
         }
-    };
+    }
+
     return (
         <div className="homePageWrapper">
             <div className="formWrapper">
@@ -48,7 +46,7 @@ const Home = () => {
                         type="text"
                         className="inputBox"
                         placeholder="ROOM ID"
-                        onChange={(e) => setRoomId(e.target.value)}
+                        onChange={(event) => setRoomId(event.target.value)}
                         value={roomId}
                         onKeyUp={handleInputEnter}
                     />
@@ -56,7 +54,7 @@ const Home = () => {
                         type="text"
                         className="inputBox"
                         placeholder="USERNAME"
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(event) => setUsername(event.target.value)}
                         value={username}
                         onKeyUp={handleInputEnter}
                     />
@@ -77,12 +75,11 @@ const Home = () => {
             </div>
             <footer>
                 <h4>
-                    Built with 💛 &nbsp; by &nbsp;
-                    <a href="https://github.com/codersgyan">Coder's Gyan</a>
+                    Developed by <a href="">Faizan Munir</a>, <a href="">Muneeb Sultan</a>, and <a href="">Hassan Mahmood</a>
                 </h4>
             </footer>
         </div>
-    );
-};
+  )
+}
 
-export default Home;
+export default Home
